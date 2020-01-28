@@ -1,3 +1,5 @@
+package node;
+
 public class State_Space {
 
     final int[] Goal =      {1 , 2 , 3 , 8 , 0 , 4 , 7 , 6 , 5};
@@ -11,9 +13,14 @@ public class State_Space {
         this.root = curr;
     }
 
-//    @ TODO: 1/28/2020
+    /**
+     * this is a hard-coded solution that assumes the input array is mean to be formatted into a 3 x 3 array.
+     * @param in    Input 1 dimensional array
+     * @return      The conversion of the in array to a matrix.
+     */
     private int[][] refactor_array(int [] in){
-        return null;
+        int[][] out = {{in[0] , in[1] , in[2]} , {in[3] , in[4] , in[5]} , {in[6] , in[7] , in[8]}};
+        return out;
     }
 
     public static void main(String[] args){
