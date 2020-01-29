@@ -19,7 +19,6 @@ public class bfs {
     }
 
     public Node solve(){
-        this.frontier.get(0).show_state();
         while(true){
             if(this.frontier.isEmpty()) return null;
             Node current = this.frontier.remove(0);
@@ -43,8 +42,9 @@ public class bfs {
     public static void main(String[] args){
         final int[] GOAL =      {1 , 2 , 3 , 8 , 0 , 4 , 7 , 6 , 5};
         final int[] EASY =      {1 , 3 , 4 , 8 , 6 , 2 , 7 , 0 , 5};
+        final int[] EASYEST =   {1 , 2 , 3 , 8 , 6 , 4 , 7 , 5 , 0};
 
         bfs test = new bfs(EASY, GOAL);
-        test.solve().show_state();
+        test.solve().show_progression_path();
     }
 }

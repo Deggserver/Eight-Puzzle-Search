@@ -1,5 +1,6 @@
 package node;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
@@ -88,12 +89,27 @@ public class Node {
     }
 
     public void show_state(){
+        System.out.print("+---+---+---+\n| ");
         for (int i = 0; i < this.state.length; i++) {
-            if(i%3 == 0) System.out.println("+-+-+/n|");
-            System.out.print(this.state[i] + '|');
+            if(i%3==2 && i!=this.state.length-1) System.out.print(this.state[i] + " |\n+---+---+---+\n| ");
+            else System.out.print(this.state[i] + " | ");
         }
-        System.out.println("+-+-+");
+        System.out.println("\n+---+---+---+\n");
     }
 
+    public void show_progression_path(){
+        ArrayList<Node> path = new ArrayList<>();
+        for(Node curr = this; curr != null; curr = curr.parent){
+            path.add(0 , curr);
+        }
+        for (Node n : path){
+            System.out.println(n.toString());
+            n.show_state();
+        }
+    }
+
+    public String toString(){
+        return "Action:" + this.action + " Depth:" + this.depth + " Path-cost:" + this.path_cost;
+    }
 
 }
