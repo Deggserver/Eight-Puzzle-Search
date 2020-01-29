@@ -50,33 +50,64 @@ public class Node {
     public ArrayList<Node> expand(){
         ArrayList<Node> out = new ArrayList<>();
         int zero = index_of_zero();
-        //up
-        if(zero >= 3){
-            int tmp[] = this.state.clone();
-            tmp[zero] = tmp[zero-3];
-            tmp[zero-3] = 0;
-            out.add(new Node(tmp, this, "up", tmp[zero]));
-        }
-        //down
-        if(zero <= 5){
-            int tmp[] = this.state.clone();
-            tmp[zero] = tmp[zero+3];
-            tmp[zero+3] = 0;
-            out.add(new Node(tmp, this, "down", tmp[zero]));
-        }
-        //left
-        if(zero > 0){
-            int tmp[] = this.state.clone();
-            tmp[zero] = tmp[zero-1];
-            tmp[zero-1] = 0;
-            out.add(new Node(tmp, this, "left", tmp[zero]));
-        }
-        //right
-        if(zero < 8){
-            int tmp[] = this.state.clone();
-            tmp[zero] = tmp[zero+1];
-            tmp[zero+1] = 0;
-            out.add(new Node(tmp, this, "right", tmp[zero]));
+        if(this.parent != null && this.parent.action != null) {
+            //up
+            if (zero >= 3 && !(this.parent.action.equals("up"))) {
+                int tmp[] = this.state.clone();
+                tmp[zero] = tmp[zero - 3];
+                tmp[zero - 3] = 0;
+                out.add(new Node(tmp, this, "up", tmp[zero]));
+            }
+            //down
+            if (zero <= 5 && !(this.parent.action.equals("down"))) {
+                int tmp[] = this.state.clone();
+                tmp[zero] = tmp[zero + 3];
+                tmp[zero + 3] = 0;
+                out.add(new Node(tmp, this, "down", tmp[zero]));
+            }
+            //left
+            if (zero % 3 > 0 && !(this.parent.action.equals("left"))) {
+                int tmp[] = this.state.clone();
+                tmp[zero] = tmp[zero - 1];
+                tmp[zero - 1] = 0;
+                out.add(new Node(tmp, this, "left", tmp[zero]));
+            }
+            //right
+            if (zero % 3 < 2 && !(this.parent.action.equals("right"))) {
+                int tmp[] = this.state.clone();
+                tmp[zero] = tmp[zero + 1];
+                tmp[zero + 1] = 0;
+                out.add(new Node(tmp, this, "right", tmp[zero]));
+            }
+        }else{
+            //up
+            if (zero >= 3) {
+                int tmp[] = this.state.clone();
+                tmp[zero] = tmp[zero - 3];
+                tmp[zero - 3] = 0;
+                out.add(new Node(tmp, this, "up", tmp[zero]));
+            }
+            //down
+            if (zero <= 5) {
+                int tmp[] = this.state.clone();
+                tmp[zero] = tmp[zero + 3];
+                tmp[zero + 3] = 0;
+                out.add(new Node(tmp, this, "down", tmp[zero]));
+            }
+            //left
+            if (zero % 3 > 0) {
+                int tmp[] = this.state.clone();
+                tmp[zero] = tmp[zero - 1];
+                tmp[zero - 1] = 0;
+                out.add(new Node(tmp, this, "left", tmp[zero]));
+            }
+            //right
+            if (zero % 3 < 2) {
+                int tmp[] = this.state.clone();
+                tmp[zero] = tmp[zero + 1];
+                tmp[zero + 1] = 0;
+                out.add(new Node(tmp, this, "right", tmp[zero]));
+            }
         }
         return out;
     }
