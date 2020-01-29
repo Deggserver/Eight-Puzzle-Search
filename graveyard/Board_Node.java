@@ -15,11 +15,11 @@ public class Board_Node{
 
     /**
      *
-     * @param current_layout    parent node's board
-     * @param parent            node.Board_Node that called the contructor
-     * @param depth             what ply this node is in
-     * @param x                 the x location of the zero tile in the parent node
-     * @param y                 the y location of the zero tile in the parent node
+     * @param current_layout    parent Node's board
+     * @param parent            Node.Board_Node that called the contructor
+     * @param depth             what ply this Node is in
+     * @param x                 the x location of the zero tile in the parent Node
+     * @param y                 the y location of the zero tile in the parent Node
      * @param new_x             the x location to move the zero tile to
      * @param new_y             the y location to move the zero tile to
      */
@@ -94,7 +94,7 @@ public class Board_Node{
                 if(new int[] {x,y} != this.parent.get_zero_loction()) return true;
             }
         }
-        else return false;
+        return false;
     }
 
     public void add_child(Board_Node c){
@@ -106,6 +106,6 @@ public class Board_Node{
     }
 
     public int[] get_zero_loction(){
-        return new int[] {zero_x, zero_y}
+        return new int[] {zero_x, zero_y};
     }
 }
