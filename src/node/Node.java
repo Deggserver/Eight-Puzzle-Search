@@ -87,4 +87,13 @@ public class Node {
         return -1;
     }
 
+    public void show_state(){
+        for (int i = 0; i < this.state.length; i++) {
+            if(i%3 == 0) System.out.println("+-+-+/n|");
+            System.out.print(this.state[i] + '|');
+        }
+        System.out.println("+-+-+");
+    }
+
+
 }
