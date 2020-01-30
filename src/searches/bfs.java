@@ -32,7 +32,7 @@ public class bfs {
             for (Node child : current.expand()){
                 if(!(frontier_or_explored_contains(child))){
                     if(this.goal_test(child.state)) return child;
-                    this.frontier.add(0 , child);
+                    this.frontier.add(child);
                 }
             }
         }
@@ -60,7 +60,7 @@ public class bfs {
         System.out.println("Time: "+time+" Space: "+space);
     }
 
-    public static void main(){
+    public static void main(String[] args){
         final int[] GOAL =      {1 , 2 , 3 , 8 , 0 , 4 , 7 , 6 , 5};
         final int[] EASY =      {1 , 3 , 4 , 8 , 6 , 2 , 7 , 0 , 5};
         final int[] MEDIUM =    {2 , 8 , 1 , 0 , 4 , 3 , 7 , 6 , 5};
