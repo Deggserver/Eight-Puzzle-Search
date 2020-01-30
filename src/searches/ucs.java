@@ -2,10 +2,7 @@ package searches;
 
 import node.Node;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.PriorityQueue;
-import java.util.Set;
+import java.util.*;
 
 public class ucs {
     final public int[] goal_state;
@@ -33,12 +30,24 @@ public class ucs {
             if(this.goal_test(current.state));
             this.explored.add(current.state);
             for (Node child : current.expand()){
-                if(!(this.frontier.contains(child)) || !(this.explored.contains(child.state))){
+                if(!(frontier_or_explored_contains(child))){
                     this.frontier.add(child);
-                }else if(this.frontier.contains(current)){
-
+                }else{
+                    this.does_current_cost_less(current);
                 }
             }
+        }
+    }
+
+    public void does_current_cost_less(Node curr){
+        Node[] copy = new Node[this.frontier.size()];
+        this.frontier.toArray(copy);
+        for (int i = 0; i < copy.length; i++) {
+            if(curr.state == copy[i].state && curr.path_cost < copy[i].path_cost) copy[i] = curr;
+        }
+        this.frontier.clear();
+        for (Node n : copy){
+            this.frontier.add(n);
         }
     }
 
@@ -47,5 +56,34 @@ public class ucs {
             if(this.goal_state[i] != test_state[i]) return false;
         }
         return true;
+    }
+
+    public boolean frontier_or_explored_contains(Node c){
+        for (Node n : this.frontier){
+            if(n.parent == c.parent && n.path_cost == c.path_cost && n.state == c.state && n.action == c.action && n.depth == c.depth) return true;
+        }
+        for (int[] state : this.explored){
+            if(Arrays.equals(state , c.state)) return true;
+        }
+        return false;
+    }
+
+
+    public static void main(){
+        final int[] GOAL =      {1 , 2 , 3 , 8 , 0 , 4 , 7 , 6 , 5};
+        final int[] EASY =      {1 , 3 , 4 , 8 , 6 , 2 , 7 , 0 , 5};
+        final int[] MEDIUM =    {2 , 8 , 1 , 0 , 4 , 3 , 7 , 6 , 5};
+        final int[] HARD =      {5 , 6 , 7 , 4 , 0 , 8 , 3 , 2 , 1};
+
+        ucs test1 = new ucs(EASY, GOAL);
+        System.out.println("---EASY---");
+        test1.solve().show_progression_path();
+        ucs test2 = new ucs(MEDIUM , GOAL);
+        System.out.println("---MEDIUM---");
+        test2.solve().show_progression_path();
+        ucs test3 = new ucs(HARD , GOAL);
+        System.out.println("---HARD---");
+        test3.solve().show_progression_path();
+
     }
 }
